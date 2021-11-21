@@ -4,3 +4,9 @@ Robot Setup: wheeled differential drive robot (ROMI base), with a beacon sensor 
 
 This will be an excercise to get used to the command structure provided by WPILib - don't worry too much about the implementation of the subsystems themselves.
 See https://docs.wpilib.org for docs
+
+Details:
+Beacons:
+    - transmit a unique ID and the required color
+    - always transmit, even after their color wheel has been matched.
+    - do not disclose if their color wheel has been matched or not
