@@ -41,9 +41,14 @@ public class BeaconSensor extends SubsystemBase {
     }
 
     // scan once for any visible beacons
-    public void scan() {
+    private void scan() {
         // storing duplicate id will replace value, which is good because we want
         // the Beacon objects to stay updated with the most current info
         return;
+    }
+
+    @Override
+    public void periodic() {
+        scan();
     }
 }
