@@ -4,55 +4,23 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.DriveToNearestBeacon;
-import frc.robot.subsystems.BeaconSensor;
-import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.subsystems.*;
+import frc.robot.input.*;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
+
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
-  private final BeaconSensor m_beaconSensor = new BeaconSensor();
+  private final Drivetrain m_drivetrain = new Drivetrain();
+  private final Controller m_controller = new Controller(0);
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
-  private final DriveToNearestBeacon m_driveToNearestBeacon = 
-        new DriveToNearestBeacon(m_beaconSensor, m_romiDrivetrain);
-
-  Joystick joystick = new Joystick(1);
-  JoystickButton button = new JoystickButton(joystick, 1);
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+  public RobotContainer() { 
+    // teleop driving
+    m_drivetrain.setDefaultCommand(new RunCommand(() -> 
+      m_drivetrain.arcadeDrive(-m_controller.getAxis(Controller.Axis.kLeftY), m_controller.getAxis(Controller.Axis.kRightX)),
+      //m_drivetrain.tankDrive(-m_controller.getAxis(Controller.Axis.kLeftY), m_controller.getAxis(Controller.Axis.kRightY)),
+      m_drivetrain));
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-    button.whenActive(m_driveToNearestBeacon);
-  }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
+  public Command getAutonomousCommand() { return null; }
 }

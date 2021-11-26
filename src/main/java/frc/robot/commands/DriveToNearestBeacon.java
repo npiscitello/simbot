@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.BeaconSensor;
-import frc.robot.subsystems.RomiDrivetrain;
+import frc.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -10,7 +10,7 @@ public class DriveToNearestBeacon extends CommandBase {
 
   private Integer iterations = 0;
 
-  public DriveToNearestBeacon(BeaconSensor sensor, RomiDrivetrain drivetrain) {
+  public DriveToNearestBeacon(BeaconSensor sensor, Drivetrain drivetrain) {
       addRequirements(sensor);
       addRequirements(drivetrain);
   }
