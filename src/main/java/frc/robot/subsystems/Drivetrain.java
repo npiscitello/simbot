@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SimDrivetrain extends SubsystemBase{
+public class Drivetrain extends SubsystemBase{
 
     private static final double kCountsPerRevolution = 1440.0;
     private static final double kWheelDiameterInch = 8;
@@ -40,7 +40,7 @@ public class SimDrivetrain extends SubsystemBase{
 
     private final  Field2d m_field = new Field2d();
 
-    public SimDrivetrain() {
+    public Drivetrain() {
         m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
         m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
         resetEncoders();
@@ -52,8 +52,13 @@ public class SimDrivetrain extends SubsystemBase{
         m_rightEncoder.reset();
     }
 
-    public void tankDrive(double l, double r) {
-        m_drive.tankDrive(l, r);
+    public void tankDrive(double leftSpeed, double rightSpeed) {
+        m_drive.tankDrive(leftSpeed, rightSpeed, true);
+    }
+
+    public void arcadeDrive(double xSpeed, double zRotation) {
+        // arcade drive only works properly when inputs are flipped and I can't figure out why...
+        m_drive.arcadeDrive(zRotation, xSpeed, true);
     }
 
     @Override
