@@ -5,8 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.*;
 import edu.wpi.first.wpilibj.util.Units;
 
 /**
@@ -21,9 +19,6 @@ import edu.wpi.first.wpilibj.util.Units;
  */
 public final class Constants {
     /* PHYSICAL ROBOT VALUES */
-    // we're pretending we have a kitbot until I can get my hands on a Romi again to characterize
-    public static final DifferentialDrivetrainSim kDriveSim = DifferentialDrivetrainSim.createKitbotSim(
-        KitbotMotor.kDualCIMPerSide, KitbotGearing.k10p71, KitbotWheelSize.EightInch, null);
     // this shouldn't matter for just simulations, but make sure this matches the effective counts per wheel revolution on a real bot
     public static final double kCountsPerRevolution = 1440.0;
     // make sure this matches the DifferentialDrivetrainSim constructor above (or the wheel size on your real bot)
