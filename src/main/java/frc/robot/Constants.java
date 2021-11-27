@@ -36,7 +36,9 @@ public final class Constants {
     public static final double kvVoltSecondsPerMeter = 2.18;
     public static final double kaVoltSecondsSquaredPerMeter = 0.298;
     public static final double kPDriveVel = 2.49;
-    public static final double kTrackwidthMeters = 0.4213;
+    // pulled from kitbot definitino in the DifferentialDrivetrainSim source
+    // for some reason, the characterization tool estimates a much smaller track width
+    public static final double kTrackwidthMeters = Units.inchesToMeters(26);
 
     // kinematics object
     public static final DifferentialDriveKinematics kDriveKinematics =

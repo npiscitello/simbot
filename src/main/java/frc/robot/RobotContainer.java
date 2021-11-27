@@ -38,16 +38,16 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    // 'true' for characterization, 'false' for real auto code
-    if( false ) {
-      // robot characterization
-      return new Characterize(m_drivetrain);
-    } else {
-      // actual auto code
+      // todo - Shuffleboard widget to choose between these
+      //return new Characterize(m_drivetrain);
+      return getTrajectoryCommand();
+    }
+
+    private Command getTrajectoryCommand() {
       TrajectoryConstraint autoVoltageContstraint =
-        new DifferentialDriveVoltageConstraint(
-          new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter),
-          Constants.kDriveKinematics, Constants.kMaxVoltage);
+      new DifferentialDriveVoltageConstraint(
+        new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter),
+        Constants.kDriveKinematics, Constants.kMaxVoltage);
 
       TrajectoryConfig config = 
         new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared)
@@ -60,8 +60,8 @@ public class RobotContainer {
         new Pose2d(2, 2, new Rotation2d(0)),
         // pass through
         List.of(
-          new Translation2d(1,1),
-          new Translation2d(2, -1)
+          new Translation2d(3, 3),
+          new Translation2d(4, 1)
         ),
         // end
         new Pose2d(5, 2, new Rotation2d(0)),
@@ -84,5 +84,4 @@ public class RobotContainer {
       m_drivetrain.resetOdometry(exampleTrajectory.getInitialPose());
       return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));
     }
-  }
 }
